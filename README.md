@@ -9,3 +9,4 @@ Application recipes will record the precise upstream version, download integrity
 ## Build recipes under preparation
 
 - [miniPaint 4.14.3](apps/minipaint/README.md): pinned upstream commit and Docker build, with a 3 GiB memory limit. This is build-source preparation, not a released Extella package.
+- [Hextris](apps/hextris/README.md): pinned official browser source, packaging transformations and full notices. Preparation only; no Extella release yet.
