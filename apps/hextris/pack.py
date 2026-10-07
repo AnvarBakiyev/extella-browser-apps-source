@@ -33,6 +33,8 @@ h = f.read_text().replace('<head>', '<head><script src="./extella-sandbox-shim.j
 h = re.sub(r'<link[^>]*(?:fonts.googleapis.com|style/fa/)[^>]*>', '', h)
 h = re.sub(r'<script[^>]*pagead2.googlesyndication.com[^>]*></script>', '', h)
 h = re.sub(r'<script>\s*\(function\(i,s,o,g,r,a,m\)[\s\S]*?</script>', '', h)
+h = h.replace('</body>', '<script src="./extella-file-save.js"></script></body>')
+shutil.copy2(recipe / 'extella-file-save.js', site / 'extella-file-save.js')
 f.write_text(h)
 f = site / 'js/initialization.js'
 j, count = re.subn(r'\(function\(i, s, o, g, r, a, m\)[\s\S]*?ga\(\x27send\x27, \x27pageview\x27\);', '', f.read_text())
@@ -42,7 +44,11 @@ f.write_text(j)
 f = site / 'style/style.css'
 f.write_text(re.sub(r'@font-face\s*\{[^}]+\}', '', f.read_text()))
 f = site / 'js/main.js'
-f.write_text(f.read_text().replace('http://hextris.io/a.js', './a.js'))
+j = f.read_text().replace('http://hextris.io/a.js', './a.js')
+telemetry = "$.get('http://54.183.184.126/' + String(score))"
+if j.count(telemetry) != 1:
+    raise SystemExit('Expected exactly one game-over score telemetry call.')
+f.write_text(j.replace(telemetry, '/* Extella packaging: game-over score telemetry removed. */'))
 (site / 'EXTELLA_CHANGES.md').write_text('''# Hextris packaging changes — 2026-10-07
 
 Upstream source: https://github.com/Hextris/hextris/tree/''' + PIN + '''
@@ -50,12 +56,12 @@ Copyright (C) 2018 Logan Engstrom; GPL-3.0-or-later. Full license in LICENSE.md.
 Packaging recipe and MIT shim source: https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/main/apps/hextris
 
 - Insert the sandbox shim before all upstream scripts.
-- Remove both Google Analytics loaders/calls and the advertising loader.
+- Remove both Google Analytics loaders/calls, the advertising loader and game-over score telemetry.
 - Omit external and bundled Exo fonts and FontAwesome stylesheet/font files. Existing text labels and keyboard instructions remain; decorative canvas font glyphs are unavailable. Use the browser font fallback.
 - Change remote a.js URL to the identical empty a.js supplied by upstream.
 - Retain application source, licenses, copyright notices and bundled library notices. No game logic fixes.
 
-Preparation package: the original game has no file export. Distribution in Extella awaits the user's decision on that task requirement and native-window testing. There are no additional license restrictions on copying, modifying or sharing this GPL application.
+User-authorized file persistence adds Save game / Load game / Continue game. Files contain board, incoming blocks, score, high scores, combo, color palette and wave state as validated plain JSON; no imported functions execute. Temporary score labels and screen shake are not retained. Games pause during save/load. Native-window testing remains pending. There are no additional license restrictions on copying, modifying or sharing this GPL application.
 ''')
 files = sorted(f for f in site.rglob('*') if f.is_file())
 if len(files) > 500:
