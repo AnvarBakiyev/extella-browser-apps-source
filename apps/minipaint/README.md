@@ -14,4 +14,12 @@ sh apps/minipaint/build.sh /absolute/path/to/empty/build-directory
 
 Two fresh builds from this commit and lockfile completed on 2026-10-07, including an end-to-end invocation of this recipe. Both generated bundle SHA-256 `88789c0f547b1c6fd8969bff65ad6facf17af832ef8cde5172d0ef80b82a754d`. Real Chrome tests of the rebuilt app in an opaque-origin sandbox passed drawing, JSON export/reimport and PNG export online and cold offline. No app logic changes were made.
 
-Packaging is still under review. No miniPaint Extella prerelease is supplied by this recipe yet. Complete dependency notices, the packaging script and a release manifest will accompany any future package. NeuQuant licensing clarification remains pending. This build recipe and the shared compatibility shim are MIT licensed; upstream files retain their respective licenses.
+Package the tested build with:
+
+```sh
+python3 apps/minipaint/pack.py /absolute/path/to/build-directory/source /absolute/path/to/new/package-directory
+```
+
+The packer checks the upstream commit, source changes and tested bundle hash. It adds the first-script shim and full notices without application logic edits, then emits a deterministic ZIP and manifest within the 20 MiB / 500-file limits. All modifications are represented by these scripts and the shared shim. Source for npm dependencies is installed under `node_modules` by the pinned build recipe; AlertifyJS source is available there and at https://registry.npmjs.org/alertifyjs/-/alertifyjs-1.14.0.tgz .
+
+No miniPaint Extella prerelease is supplied yet. NeuQuant licensing clarification remains pending. This build recipe and the shared compatibility shim are MIT licensed; upstream files retain their respective licenses.
