@@ -21,6 +21,11 @@
       clear: function () { data.clear(); },
       key: function (i) { var keys = Array.from(data.keys()); return i >= 0 && i < keys.length ? keys[i] : null; }
     };
+    // Preserve application helpers added to Storage.prototype without invoking
+    // native storage methods: the in-memory methods above remain own properties.
+    if (typeof Storage !== 'undefined') {
+      try { Object.setPrototypeOf(api, Storage.prototype); } catch (e) {}
+    }
     return new Proxy(api, {
       get: function (t, p) { if (p === 'length') return data.size; if (p in t) return t[p]; return typeof p === 'string' && data.has(p) ? data.get(p) : undefined; },
       set: function (t, p, v) { if (typeof p === 'string' && !(p in t)) data.set(p, String(v)); return true; },
