@@ -9,3 +9,5 @@ No application build is needed: the source tree contains the original JavaScript
 Generate the page archive using `python3 apps/hextris/pack.py /absolute/new/output`. `distribution-files.json` is the exact archive member list; `SOURCE_MANIFEST.json` contains source-file hashes. No credentials, deployment or marketplace access is required to inspect or package the source.
 
 The application is free. Marketplace prereleases remain hidden while the distributor seeks the author's response. This does not restrict recipients' rights under the license.
+
+Download correction on 2026-10-09: the save adapter now clicks a detached download anchor, matching the standard browser file-download pattern. This prevents document-level navigation handling from sending a local Blob URL through a network proxy. Game state serialization and game logic are unchanged.

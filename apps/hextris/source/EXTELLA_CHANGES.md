@@ -10,3 +10,5 @@ https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/main/apps/hextr
 The commit-pinned source URL is supplied in the listing. SOURCE_MANIFEST.json identifies every source file by SHA-256. A distribution is generated only from this source tree by pack.py.
 
 This package is free of charge. No additional restrictions on copying, modification or redistribution are imposed. Private prerelease status is the distributor's publication workflow, not a restriction on recipients' license rights.
+
+Download correction on 2026-10-09: the save adapter now clicks a detached download anchor, matching the standard browser file-download pattern. This prevents document-level navigation handling from sending a local Blob URL through a network proxy. Game state serialization and game logic are unchanged.
