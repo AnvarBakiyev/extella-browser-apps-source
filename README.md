@@ -1,12 +1,10 @@
-# Extella browser application packaging sources
+# Extella browser application corresponding sources
 
-Public source for the compatibility shim and reproducible packaging changes distributed with open-source browser applications in Extella.
+This repository contains full source snapshots, dependency inputs, licenses and packaging recipes for modified browser applications distributed as free private Extella prereleases.
 
-The shim in `shim/extella-sandbox-shim.js` is MIT licensed. It supplies temporary storage in sandboxed windows, disables unsupported native file pickers so applications can use their own fallbacks, and stubs unavailable service workers. IndexedDB is disabled, not emulated. Save work to a file before closing the window.
+- [miniPaint](apps/minipaint/README.md): combined distribution GPL-3.0-only, including retained GPL AlertifyJS; upstream miniPaint remains MIT.
+- [Hextris](apps/hextris/README.md): GPL-3.0-or-later.
 
-Application recipes will record the precise upstream version, download integrity, included license notices, and all packaging changes. Upstream code retains its own license. No Extella platform code, credentials, account inventories, or deployment credentials are included here.
+Each application directory states the exact upstream revision and includes a SHA-256 source manifest. Extella changes in those directories use the application's distribution license. Upstream copyright/license notices are retained. The shared historical shim outside the application directories remains MIT licensed.
 
-## Build recipes under preparation
-
-- [miniPaint 4.14.3](apps/minipaint/README.md): pinned upstream commit and Docker build, with a 3 GiB memory limit. This is build-source preparation, not a released Extella package.
-- [Hextris](apps/hextris/README.md): pinned official browser source, packaging transformations and full notices. Preparation only; no Extella release yet.
+No Extella platform implementation or marketplace credentials are needed to build or package these applications. Publication in the Extella store is controlled separately; source availability imposes no additional restrictions on recipients.

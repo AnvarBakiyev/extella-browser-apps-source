@@ -1,17 +1,11 @@
-# Hextris packaging source with file persistence
+# hextris: full corresponding source
 
-This recipe packages the official browser files from commit `3f4847dc8fd7dab3d1c87e6324b9159d92fbd396`. It performs no upstream build and executes no upstream JavaScript. All transformations are visible in `pack.py`: add the shared MIT shim, remove analytics, ads and game-over score telemetry, omit custom font resources, relocate the author's empty remote script to its identical bundled copy, and include notices. The user-authorized GPL-3.0-or-later adapter adds file persistence; other game logic is not repaired.
+Upstream revision: `3f4847dc8fd7dab3d1c87e6324b9159d92fbd396`. Full modified source: [source](source). Distribution license: **GPL-3.0-or-later**, including Extella-authored changes in this directory; upstream permissive notices remain intact. See [COPYING](COPYING) and source/THIRD_PARTY_NOTICES.md.
 
-```sh
-git clone https://github.com/Hextris/hextris.git /absolute/path/to/hextris
-git -C /absolute/path/to/hextris checkout --detach 3f4847dc8fd7dab3d1c87e6324b9159d92fbd396
-python3 apps/hextris/pack.py /absolute/path/to/hextris /absolute/path/to/new-output
-```
+Modified by Extella on 2026-10-09: window compatibility shim and validated JSON save/load; removed telemetry and advertising, omitted decorative fonts, and used the bundled copy of the empty remote script.
 
-The output contains `site`, `page.zip`, and a size/file-count/SHA-256 manifest. The source checkout must be clean and the output directory must not already exist. The archive retains the main GPL license, copyright attribution and third-party notices. The packaging recipe and shim are MIT licensed; all upstream code retains its own license.
+No application build is needed: the source tree contains the original JavaScript and the full unminified save adapter. The complete preferred source is available directly in source/. Other game logic is unchanged.
 
-Save game / Load game export and restore board stacks, incoming blocks, score, high scores, combo state, wave generator state and the current color palette. Files are validated plain JSON: imported strings are never evaluated or passed to JSONfn.parse. Trusted upstream constructors restore object methods. Games pause while saved or loaded; Continue game resumes them. Temporary score labels, screen shake and the wall-clock rotation cooldown are not retained. Limits: 2 MB per file, 500 blocks total, 100 blocks per lane. The adapter source is `extella-file-save.js`, licensed GPL-3.0-or-later; the full GPL license is included in the packaged upstream LICENSE.md.
+Generate the page archive using `python3 apps/hextris/pack.py /absolute/new/output`. `distribution-files.json` is the exact archive member list; `SOURCE_MANIFEST.json` contains source-file hashes. No credentials, deployment or marketplace access is required to inspect or package the source.
 
-Omitted icon fonts leave decorative canvas glyphs unavailable; English text instructions and keyboard gameplay remain. Native Extella verification and final deployment are still pending.
-
-Validation on 2026-10-07: Chrome opaque-origin sandbox tests passed exact fresh-window JSON roundtrip including two attached blocks, incoming block, score 123, combo multiplier 3, spiral generator and an explicit alternate-color fixture (the upstream color button is absent from this pinned HTML); malformed-file preservation; and rotation after continuing. Both online and cold-offline cases had no page errors or external requests. A separate forced-overflow test exercised the original game-over path and confirmed no score telemetry after its removal. These tests do not establish full gameplay coverage.
+The application is free. Marketplace prereleases remain hidden while the distributor seeks the author's response. This does not restrict recipients' rights under the license.
