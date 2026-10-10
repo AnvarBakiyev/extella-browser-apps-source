@@ -11,3 +11,5 @@ Generate the page archive using `python3 apps/hextris/pack.py /absolute/new/outp
 The application is free. Marketplace prereleases remain hidden while the distributor seeks the author's response. This does not restrict recipients' rights under the license.
 
 Download correction on 2026-10-09: the save adapter now clicks a detached download anchor, matching the standard browser file-download pattern. This prevents document-level navigation handling from sending a local Blob URL through a network proxy. Game state serialization and game logic are unchanged.
+
+Packaging resolves the full checked-out Git commit and embeds its source URL in EXTELLA_CHANGES.md. Run from a clean Git checkout; source manifests are verified before packaging. The only transformation of this notice template is substitution of the source commit; runtime files are copied unchanged.

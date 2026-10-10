@@ -6,7 +6,7 @@ Distribution license: GPL-3.0-only. Full text: COPYING. Original copyright and d
 
 Exact upstream revision: a79733eb803fc97084ef0ee4faa96b031e69e1c0.
 Corresponding source, all packaging changes and the build recipe are in this directory:
-https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/main/apps/minipaint
-The commit-pinned source URL is supplied in the listing. SOURCE_MANIFEST.json identifies every source file by SHA-256. A distribution is generated only from this source tree by pack.py.
+https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/__SOURCE_COMMIT__/apps/minipaint
+pack.py replaces the source-commit placeholder with the full checked-out commit in the distributed notice; the listing uses that same URL. SOURCE_MANIFEST.json identifies every source file by SHA-256. A distribution is generated only from this source tree by pack.py.
 
 This package is free of charge. No additional restrictions on copying, modification or redistribution are imposed. Private prerelease status is the distributor's publication workflow, not a restriction on recipients' license rights.

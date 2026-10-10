@@ -6,8 +6,8 @@ Distribution license: GPL-3.0-or-later. Full text: COPYING. Original copyright a
 
 Exact upstream revision: 3f4847dc8fd7dab3d1c87e6324b9159d92fbd396.
 Corresponding source, all packaging changes and the build recipe are in this directory:
-https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/main/apps/hextris
-The commit-pinned source URL is supplied in the listing. SOURCE_MANIFEST.json identifies every source file by SHA-256. A distribution is generated only from this source tree by pack.py.
+https://github.com/AnvarBakiyev/extella-browser-apps-source/tree/__SOURCE_COMMIT__/apps/hextris
+pack.py replaces the source-commit placeholder with the full checked-out commit in the distributed notice; the listing uses that same URL. SOURCE_MANIFEST.json identifies every source file by SHA-256. A distribution is generated only from this source tree by pack.py.
 
 This package is free of charge. No additional restrictions on copying, modification or redistribution are imposed. Private prerelease status is the distributor's publication workflow, not a restriction on recipients' license rights.
 

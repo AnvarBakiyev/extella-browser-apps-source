@@ -11,3 +11,5 @@ Generate the page archive using `python3 apps/minipaint/pack.py /absolute/new/ou
 The application is free. Marketplace prereleases remain hidden while the distributor seeks the author's response. This does not restrict recipients' rights under the license.
 
 Build-time data attribution: caniuse-lite 1.0.30001788 by Ben Briggs (package author), browser support data from Can I Use by Alexis Deveria and contributors; https://github.com/browserslist/caniuse-lite and https://caniuse.com/ . CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/), unchanged. Full license and attribution remain inside the dependency snapshot. This build-time dataset is not loaded by the packaged miniPaint page.
+
+Packaging resolves the full checked-out Git commit and embeds its source URL in EXTELLA_CHANGES.md. Run from a clean Git checkout; source manifests are verified before packaging. The only transformation of this notice template is substitution of the source commit; runtime files are copied unchanged.
